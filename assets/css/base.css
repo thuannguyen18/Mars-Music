@@ -1,0 +1,53 @@
+:root {
+    --primary-color: #3f3d85;
+    --background-color: #3f3d85;
+    --text-color: #eee8e8;
+    --sub-text-color: #ffffff80;
+    --button-hover: #7F53AC;
+}
+
+* {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+    transition: all .2s linear;
+}
+
+html {
+    font-size: 62.5%;
+    font-family: "Poppins", sans-serif;
+    letter-spacing: 0.2px;
+    cursor: default;
+}
+
+body {
+    background: linear-gradient(to right,#647DEE, #7F53AC);
+}
+
+.music-player {
+    padding-bottom: 90px;
+}
+
+.grid {
+    max-width: 1440px;
+    margin: 0 auto;
+}
+
+.col-3 {
+    width: calc(100% / 3);
+}
+
+.col-4 {
+    width: calc(100% / 4);
+}
+
+@keyframes FadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(50px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
