@@ -154,15 +154,10 @@ songLists.addEventListener('click', (e) => {
     const songFavorite = e.target.closest('.song-item-favorite-icon');
     const songOptions = e.target.closest('.song-item-options-icon');
 
-    console.log('id: ' + songID + ' & ' + 'index: ' + index);
-
     if (songFavorite) {
         addToFavorite(songID);
-        // console.log('love it song ' + songID + ' on playlist');
-        // console.log(songs);
-        // console.log('index: ' + index)
     } else if (songOptions) {
-        console.log('what do you want');
+        console.log('remove');
     } else if (favoriteItem) {
         favoriteID = Number(favoriteItem.getAttribute('id'));
         favoriteIndex = Number(favoriteItem.getAttribute('index'));

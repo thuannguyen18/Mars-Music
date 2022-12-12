@@ -138,11 +138,6 @@ function addToFavorite(id) {
     }
 }
 
-// bugs
-function addToFavorite2() {
-
-}
-
 // Chuyển bài hát tiếp theo
 function nextSong() {
     index++;
