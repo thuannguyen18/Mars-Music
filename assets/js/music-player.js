@@ -1,3 +1,4 @@
+// Vị trị bài hát hiện tại
 let index = 0;
 let songID = 1;
 
@@ -12,32 +13,54 @@ let isRepeat = false;
 let isMute = false;
 let isFavor = false;
 
+// Mảng chứa các bài hát cùng thể loại
+let raps = [];
+let indies = [];
+let pops = [];
+
 // Audio của bài hát (mặc định là bài hát đầu tiên)
-audio.src = getSong(index).path;
+audio.src = songs[index].path;
+
 // Hiển thị bài hát trên player-control (mặc định hiển thị bài hát đầu tiên)
 loadSong(songID);
+
 // Hiển thị bài hát trên playlist 
+loadSongInfo(songID);
 loadSongs(index);
+
+// CD xoay vòng tròn 
+const cdAnimation = cd.animate([
+    { transform: 'rotate(360deg)' }
+],
+    {
+        duration: 10000,
+        iterations: Infinity
+    }
+);
+cdAnimation.pause();
 
 // Xử lý các sự kiện
 toggleBtn.addEventListener('click', togglePlay);
 playlistBtn.addEventListener('click', togglePlay);
+cd.addEventListener('click', togglePlay);
 
 nextBtn.addEventListener('click', () => {
-    if (isRandom) {
-        randomSong();
-    } else if (isFavor) {
-        nextFavoriteSong();
+    if (isRandom && isFavor) {
+        randomFavoriteSong();
+    } else if (isRandom || isFavor) {
+        if (isRandom) randomSong();
+        if (isFavor) nextFavoriteSong();
     } else {
         nextSong();
     }
 });
 
 prevBtn.addEventListener('click', () => {
-    if (isRandom) {
-        randomSong();
-    } else if (isFavor) {
-        previousFavoriteSong();
+    if (isRandom && isFavor) {
+        randomFavoriteSong();
+    } else if (isRandom || isFavor) {
+        if (isRandom) randomSong();
+        if (isFavor) previousFavoriteSong();
     } else {
         previousSong();
     }
@@ -60,9 +83,12 @@ audio.addEventListener('timeupdate', (e) => {
     const time = e.target.currentTime;
     if (totalTime) {
         const progressTime = Math.floor(time / totalTime * 100);
+
         progressBar.max = Math.floor(totalTime);
         progressBar.value = Math.floor(time);
+
         progressInput.value = progressTime;
+
         timeStart.innerText = formatSecond(Math.floor(time));
         timeEnd.innerText = formatMinute(totalTime);
     }
@@ -89,8 +115,11 @@ audio.addEventListener('pause', () => {
 });
 
 audio.addEventListener('ended', () => {
-    if (isRandom) {
-        randomSong();
+    if (isRandom && isFavor) {
+        randomFavoriteSong();
+    } else if (isRandom || isFavor) {
+        if (isRandom) randomSong();
+        if (isFavor) nextFavoriteSong();
     } else if (isRepeat) {
         repeatSong();
     } else {
@@ -149,46 +178,89 @@ volumeBtn.addEventListener('click', () => {
 });
 
 songLists.addEventListener('click', (e) => {
-    const songItem = e.target.closest('.song-item');
-    const favoriteItem = e.target.closest('.favorite-item');
-    const songFavorite = e.target.closest('.song-item-favorite-icon');
-    const songOptions = e.target.closest('.song-item-options-icon');
+    const songItem = e.target.closest('.song-item:not(.song-active)');
+    const songFavorite = e.target.closest('.song-item-favorite');
+    const songOption = e.target.closest('.song-item-options');
 
-    if (songFavorite) {
-        addToFavorite(songID);
-    } else if (songOptions) {
-        console.log('remove');
-    } else if (favoriteItem) {
-        favoriteID = Number(favoriteItem.getAttribute('id'));
-        favoriteIndex = Number(favoriteItem.getAttribute('index'));
-        audio.src = getFavoriteSong(favoriteIndex).path;
-        audio.play();
-        loadSong(favoriteID);
-        loadFavoriteSongs(favoriteID);
-        favorID = favoriteID;
-        favorIndex = favoriteIndex;
-    } else {
-        songID = Number(songItem.getAttribute('id'));
-        index = Number(songItem.getAttribute('index'));
-        audio.src = getSong(index).path;
-        audio.play();
-        loadSong(songID);
-        loadSongs(index);
+    const favoriteItem = e.target.closest('.favorite-item:not(.song-active)');
+    const rapItem = e.target.closest('.rap-item');
+    const indieItem = e.target.closest('.indie-item');
+    const popItem = e.target.closest('.pop-item');
+
+    if (songItem || songFavorite) {
+        if (songItem) {
+            songID = Number(songItem.getAttribute('id'));
+            index = Number(songItem.getAttribute('index'));
+            handleCategory(songID, index, songs, 'song');
+        }
+
+        if (songFavorite) {
+            e.stopPropagation();
+            addToFavorite(songID);
+        }
+    }
+
+    if (favoriteItem || songOption) {
+        if (favoriteItem) {
+            favorID = Number(favoriteItem.getAttribute('id'));
+            favorIndex = Number(favoriteItem.getAttribute('index'));
+            audio.src = favoriteSongs[favorIndex].path;
+            audio.play();
+            loadSong(favorID);
+            loadSongInfo(favorID);
+            loadFavoriteSongs(favorID);
+        }
+
+        if (songOption) {
+            const options = document.querySelectorAll('.song-item-options-box');
+            const removes = document.querySelectorAll('.song-item-options-remove');
+
+            options[favorIndex].style.display = 'block';
+            removes.forEach(remove => {
+                remove.onclick = function () {
+                    if (favorID === Number(remove.id)) {
+                        removeFavoriteSong(favorID);
+                    }
+                }
+            });
+        }
+    }
+
+    if (rapItem) {
+        songID = Number(rapItem.getAttribute('id'));
+        index = Number(rapItem.getAttribute('index'));
+        handleCategory(songID, index, raps, 'rap');
+    }
+
+    if (indieItem) {
+        songID = Number(indieItem.getAttribute('id'));
+        index = Number(indieItem.getAttribute('index'));
+        handleCategory(songID, index, indies, 'indie');
+    }
+
+    if (popItem) {
+        songID = Number(popItem.getAttribute('id'));
+        index = Number(popItem.getAttribute('index'));
+        handleCategory(songID, index, pops, 'pop');
     }
 });
 
 selectionList.addEventListener('click', selectCate);
 
-cd.addEventListener('click', togglePlay);
+playListFavoriteBtn.addEventListener('click', () => {
+    addToFavorite(songID);
+});
 
-const cdAnimation = cd.animate([
-    {
-        transform: 'rotate(360deg)'
-    }
-], 
-    {
-        duration: 10000,
-        iterations: Infinity
-    }
-);
-cdAnimation.pause();
+playListOptionBtn.addEventListener('click', () => {
+    selection.style.display = 'block';
+});
+
+userAvatar.addEventListener('click', () => {
+    userAvatarOption.classList.toggle('show');
+    userAvatarOption.style.animation = 'FadeIn .2s linear';
+});
+
+
+
+
+

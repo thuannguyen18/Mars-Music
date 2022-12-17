@@ -1,20 +1,7 @@
-// Lấy ra bài hát hiện tại
-function getSong(index) {
-    return songs[index];
-}
-
-// Lấy ra bài hát yêu thích 
-function getFavoriteSong(index) {
-    return favoriteSongs[index];
-}
-
-// Hiển thị 1 bài hát
+// Hiển thị bài hát trên thanh điều khiển
 function loadSong(id) {
     const song = songs.find(x => x.id === id);
     const { name, singer, image, isFavorite } = song;
-    cdThumbnail.src = image;
-    playlistTitle.innerText = name;
-    playlistSinger.innerText = singer;
     return songInfo.innerHTML = `
         <div class="song">
             <div class="song-info-container">
@@ -28,21 +15,27 @@ function loadSong(id) {
                 <button onclick="addToFavorite(${id})" class="song-favorite">
                     <i class="song-favorite-icon ${isFavorite ? 'bi bi-heart-fill' : 'bi bi-heart'}"></i>
                 </button>
-                <button class="song-menu">
-                    <i class="song-menu-icon bi bi-three-dots"></i>
-                </button>
             </div>
         </div>
     `;
 }
 
-// Hiển thị nhiều bài hát
-function loadSongs(index, array = songs) {
+// Hiển thị thông tin bài hát (list nhạc)
+function loadSongInfo(id) {
+    const song = songs.find(x => x.id == id);
+    const { name, image, singer } = song;
+    cdThumbnail.src = image;
+    playlistTitle.innerText = name;
+    playlistSinger.innerText = singer;
+}
+
+// Hiển thị nhiều bài hát (list nhạc)
+function loadSongs(index, array = songs, category = 'song') {
     const songList = document.querySelector('.song-list');
     const list = array.map((song, i) => {
         const { id, name, singer, image, cate, time, isFavorite } = song;
         return `
-            <li id="${id}" class="song-item ${index === i ? 'song-active' : ''}" index="${i}">
+            <li id="${id}" class="${category}-item ${index === i ? 'song-active' : ''}" index="${i}">
                 <div class="song-item-info col-3 col-2">
                     <img src="${image}" alt="" class="song-item-image">
                     <div class="song-item-text">
@@ -50,26 +43,11 @@ function loadSongs(index, array = songs) {
                         <p class="song-item-singer">${singer}</p>
                     </div>
                 </div>
-                <div class="song-item-category col-3">${cate}</div>
+                <div class="song-item-category col-3 col-2">${cate}</div>
                 <div class="song-item-time col-3 col-2">${formatMinute(time)}</div>
                 <div class="song-item-select">
                     <button class="song-item-favorite">
-                        <i onclick="addToFavorite2()" class="song-item-favorite-icon ${isFavorite ? 'bi bi-heart-fill' : 'bi bi-heart'}"></i>
-                    </button>
-                    <button class="song-item-options" id="${id}">
-                        <i class="song-item-options-icon bi bi-three-dots-vertical"></i>
-                        <div class="song-item-options-box">
-                            <ul class="song-item-options-list">
-                                <li class="song-item-options-item">
-                                    <i class="bi bi-plus-circle"></i>
-                                    <span>ADD TO FAVORITE LIST</span>
-                                </li>
-                                <li class="song-item-options-item">
-                                    <i class="bi bi-trash3"></i>
-                                    <span>REMOVE FROM FAVORITE LIST</span>
-                                </li>
-                            </ul>
-                        </div>
+                        <i class="song-item-favorite-icon ${isFavorite ? 'bi bi-heart-fill' : 'bi bi-heart'}"></i>
                     </button>
                 </div>
             </li>
@@ -92,23 +70,19 @@ function loadFavoriteSongs(favorID) {
                         <p class="song-item-singer">${singer}</p>
                     </div>
                 </div>
-                <div class="song-item-category col-3">${cate}</div>
+                <div class="song-item-category col-3 col-2">${cate}</div>
                 <div class="song-item-time col-3 col-2">${formatMinute(time)}</div>
                 <div class="song-item-select">
                     <button class="song-item-favorite">
                         <i class="song-item-favorite-icon bi bi-heart-fill"></i>
                     </button>
-                    <button class="song-item-options" id="${id}">
+                    <button class="song-item-options">
                         <i class="song-item-options-icon bi bi-three-dots-vertical"></i>
                         <div class="song-item-options-box">
                             <ul class="song-item-options-list">
-                                <li class="song-item-options-item">
-                                    <i class="bi bi-plus-circle"></i>
-                                    <span>ADD TO FAVORITE LIST</span>
-                                </li>
-                                <li class="song-item-options-item">
+                                <li class="song-item-options-remove" id="${id}">
                                     <i class="bi bi-trash3"></i>
-                                    <span>REMOVE FROM FAVORITE LIST</span>
+                                    <span>Remove</span>
                                 </li>
                             </ul>
                         </div>
@@ -122,20 +96,26 @@ function loadFavoriteSongs(favorID) {
 
 // Xử lý khi người dùng nhấn vào hình trái tim
 function addToFavorite(id) {
-    let favorIndex = id - 1;
+    let songIndex = id - 1;
     const favorite = document.querySelector('.song-favorite-icon');
     const favoriteItems = document.querySelectorAll('.song-item-favorite-icon');
 
-    if (songs[favorIndex].isFavorite) {
-        songs[favorIndex].isFavorite = false;
-        favorite.classList.replace('bi-heart-fill', 'bi-heart');
-        favoriteItems[favorIndex].classList.replace('bi-heart-fill', 'bi-heart');
-    } else {
-        songs[favorIndex].isFavorite = true;
-        favorite.classList.replace('bi-heart', 'bi-heart-fill');
-        favoriteItems[favorIndex].classList.replace('bi-heart', 'bi-heart-fill');
-        favoriteSongs.push(songs[favorIndex]);
-    }
+    songs[songIndex].isFavorite = true;
+    favorite.classList.replace('bi-heart', 'bi-heart-fill');
+    playlistFavoriteIcon.classList.replace('bi-heart', 'bi-heart-fill');
+    favoriteItems[songIndex].classList.replace('bi-heart', 'bi-heart-fill');
+    favoriteSongs.push(songs[songIndex]);
+}
+
+// Xoá bài hát khỏi danh sách yêu thích
+function removeFavoriteSong(id) {
+    let songIndex = id - 1;
+    const favorite = document.querySelector('.song-favorite-icon');
+
+    songs[songIndex].isFavorite = false;
+    favorite.classList.replace('bi-heart-fill', 'bi-heart');
+    favoriteSongs.splice(favorIndex, 1);
+    loadFavoriteSongs();
 }
 
 // Chuyển bài hát tiếp theo
@@ -146,22 +126,7 @@ function nextSong() {
         index = 0;
     if (songID > songs.length)
         songID = 1;
-    audio.src = getSong(index).path;
-    audio.play();
-    loadSong(songID);
-    loadSongs(index);
-}
-
-// Chuyển bài hát tiếp theo ở danh sách yêu thích
-function nextFavoriteSong() {
-    favorIndex++;
-    if (favorIndex >= favoriteSongs.length)
-        favorIndex = 0;
-    favorID = getFavoriteSong(favorIndex).id;
-    audio.src = getFavoriteSong(favorIndex).path;
-    audio.play();
-    loadSong(favorID);
-    loadFavoriteSongs(favorID); 
+    handleCategory(songID, index, songs, 'song');
 }
 
 // Chuyển bài hát trước đó
@@ -172,22 +137,7 @@ function previousSong() {
         index = songs.length - 1;
     if (songID < 1)
         songID = songs.length;
-    audio.src = getSong(index).path;
-    audio.play();
-    loadSong(songID);
-    loadSongs(index);
-}
-
-// Chuyển bài hát trước đó ở danh sách yêu thích
-function previousFavoriteSong() {
-    favorIndex--;
-    if (favorIndex < 0)
-        favorIndex = favoriteSongs.length - 1;
-    favorID = getFavoriteSong(favorIndex).id;
-    audio.src = getFavoriteSong(favorIndex).path;
-    audio.play();
-    loadSong(favorID);
-    loadFavoriteSongs(favorID); 
+    handleCategory(songID, index, songs, 'song');
 }
 
 // Phát bài hát ngẫu nhiên
@@ -200,10 +150,25 @@ function randomSong() {
 
     index = randomIndex;
     songID = randomIndex + 1;
-    audio.src = getSong(index).path;
-    audio.play();
-    loadSong(songID);
-    loadSongs(index);
+    handleCategory(songID, index, songs, 'song');
+}
+
+// Chuyển bài hát tiếp theo ở danh sách yêu thích
+function nextFavoriteSong() {
+    favorIndex++;
+    if (favorIndex >= favoriteSongs.length)
+        favorIndex = 0;
+    favorID = favoriteSongs[favorIndex].id;
+    handleFavorite(favorID, favorIndex);
+}
+
+// Chuyển bài hát trước đó ở danh sách yêu thích
+function previousFavoriteSong() {
+    favorIndex--;
+    if (favorIndex < 0)
+        favorIndex = favoriteSongs.length - 1;
+    favorID = favoriteSongs[favorIndex].id;
+    handleFavorite(favorID, favorIndex);
 }
 
 // Phát bài hát ngẫu nhiên ở danh sách yêu thích
@@ -215,11 +180,8 @@ function randomFavoriteSong() {
     } while (favorIndex === randomIndex);
 
     favorIndex = randomIndex;
-    favorID = getFavoriteSong(favorIndex).id;
-    audio.src = getFavoriteSong(favorIndex).path;
-    audio.play();
-    loadSong(favorID);
-    loadFavoriteSongs(favorID)
+    favorID = favoriteSongs[favorIndex].id;
+    handleFavorite(favorID, favorIndex);
 }
 
 // Lặp lại bài hát
@@ -263,45 +225,61 @@ function togglePlay() {
     return isPlay ? audio.pause() : audio.play();
 }
 
-// Chọn thể loại
+// Chọn thể loại nhạc
 function selectCate(e) {
-    const item = e.target.innerText;
+    const cate = e.target.innerText;
+    const target = e.target;
 
     selectionItems.forEach(item => {
         if (item.classList.contains('selection-item-active')) {
             item.classList.remove('selection-item-active');
         }
-    });
+    }); 
 
-    switch (item) {
+    switch (cate) {
         case 'All Music':
+            target.classList.add('selection-item-active');
+            isRepeat = false;
+            isRandom = false;
             isFavor = false;
-            e.target.classList.add('selection-item-active');
-            loadSong(songID);
-            loadSongs(index);
+            loadSongs();
             break;
         case 'Rap Music':
-            e.target.classList.add('selection-item-active');
-            const raps = songs.filter(song => song.cate == item);
-            loadSongs(index, raps);
+            target.classList.add('selection-item-active');
+            raps = songs.filter(song => song.cate == cate);
+            loadSongs('', raps, 'rap');
             break;
         case 'Indie Music':
-            e.target.classList.add('selection-item-active');
-            const indies = songs.filter(song => song.cate == item);
-            loadSongs(index, indies);
+            target.classList.add('selection-item-active');
+            indies = songs.filter(song => song.cate == cate);
+            loadSongs('', indies, 'indie');
             break;
         case 'Pop Music':
-            e.target.classList.add('selection-item-active');
-            const pops = songs.filter(song => song.cate == item);
-            loadSongs(index, pops);
-            break;
-        case 'Bolero':
-            console.log('bolero')
+            target.classList.add('selection-item-active');
+            pops = songs.filter(song => song.cate == cate);
+            loadSongs('', pops, 'pop');
             break;
         case 'Favorite Music':
-            e.target.classList.add('selection-item-active');
-            loadFavoriteSongs();
+            target.classList.add('selection-item-active');
             isFavor = true;
+            loadFavoriteSongs(songID);
             break;
     }
+}
+
+// Xử lý khi người dùng thay đổi thể loại nhạc
+function handleCategory(id, index, array = songs, cate = 'song') {
+    audio.src = array[index].path;
+    audio.play();
+    loadSong(id);
+    loadSongInfo(id);
+    loadSongs(index, array, cate);
+}
+
+function handleFavorite(id, index) {
+    audio.src = favoriteSongs[index].path;
+    audio.play();
+    loadSong(id);
+    loadSongInfo(id);
+    loadFavoriteSongs(id);
 }

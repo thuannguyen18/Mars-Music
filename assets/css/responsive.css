@@ -1,5 +1,18 @@
 /* Tablet */
-@media (max-width: 820px) { 
+@media (max-width: 859px) { 
+    .header-logo {
+        margin: 0 auto;
+    }
+
+    .header-search-bar {
+        display: none;
+    }
+
+    .header-user-account {
+        padding: 0;
+        margin: 0;
+    }
+
     .col-2 {
         width: calc(100% / 2);
     }
@@ -44,8 +57,8 @@
         width: 100%;
     }
 
-    .playlist-song-category,
-    .song-item-category {
+    .playlist-song-time,
+    .song-item-time {
         display: none;
     }
 
@@ -102,13 +115,28 @@
 }
 
 /* Mobile */
-@media (max-width: 539px) {
+@media (max-width: 659px) {
     .music-player {
-        padding-bottom: 120px;
+        padding-bottom: 100px;
     } 
 
     .header {
         height: 90px;
+        justify-content: center;
+    }
+
+    .header-logo {
+        margin: 0 auto;
+    }
+
+    .header-user-account {
+        padding: 0;
+        margin: 0;
+    }
+
+    .header-search-bar,
+    .header-user-name {
+        display: none;
     }
 
     .playlist {
@@ -117,17 +145,18 @@
 
     .playlist-left-side {
         flex-direction: column;
+        margin: 0;
     }
 
     .playlist-cd {
-        width: 40vh;
-        height: 40vh;
+        width: 35vh;
+        height: 35vh;
     }
     
     .playlist-cd-info {
         margin-left: 0;
         justify-content: flex-start;
-        height: 120px;
+        height: 107px;
     }
 
     .playlist-buttons {
@@ -139,30 +168,45 @@
         display: none;
     }
 
+    .playlist-right-side {
+        margin-top: 20px;
+    }
+
     .player-control {
-        height: 120px;
+        height: 100px;
     }
 
     .control-buttons {
         justify-content: space-around;
-        padding-bottom: 12px;
     }
 
     .btn-toggle-play-icon {
-        font-size: 4.5rem;
+        font-size: 4.2rem;
     }
 
     .song-item-info {
         width: 100%;
     }
 
-    .playlist-song-time,
-    .song-item-time {
+    .playlist-song-category,
+    .song-item-category {
         display: none;
     }
 
     .songs,
     .volume {
         display: none;
+    }
+}
+
+@media (max-width: 410px) {
+    .song-item-text {
+        width: 160px;
+    }
+} 
+
+@media (max-width: 325px) {
+    .song-item-text {
+        width: 100px;
     }
 }

@@ -13,11 +13,12 @@
     <link rel="stylesheet" href="./assets/css/playlist.css">
     <link rel="stylesheet" href="./assets/css/player-control.css">
     <link rel="stylesheet" href="./assets/css/responsive.css">
-    <title>Document</title>
+    <title>Mars</title>
 </head>
 
 <body>
     <div class="music-player">
+
         <!-- Header -->
         <div class="header grid">
             <div class="header-back">
@@ -36,12 +37,29 @@
                 <input type="text" class="header-search-bar-input" placeholder="Search for songs, artists...">
             </div>
             <div class="header-user-account">
-                <span class="header-user-name">Minh Thuận</span>
+                <span class="header-user-name">Minh Thuan</span>
                 <div class="header-user-avatar">
                     <i class="header-user-avatar-icon bi bi-person-circle"></i>
+                    <div class="header-user-avatar-options">
+                        <ul class="header-user-avatar-option-list">
+                            <li class="header-user-avatar-option-item">
+                                <i class="header-user-avatar-icon-option bi bi-person-circle"></i>
+                                <div class="user-wrap">
+                                    <span class="user-name">Minh Thuan</span>
+                                    <span class="user-email">@thuannguyen18</span>
+                                </div>
+                            </li>
+                            <li class="header-user-avatar-option-item">Account</li>
+                            <li class="header-user-avatar-option-item">Settings</li>
+                            <li class="header-user-avatar-option-item">
+                                <a href="#" class="header-user-avatar-option-item-log-out">Log out</a>
+                            </li>
+                        </ul>
+                    </div>
                 </div>
             </div>
         </div>
+
         <!-- Playlist -->
         <div class="playlist grid">
             <!-- Left Side -->
@@ -74,7 +92,7 @@
             <div class="playlist-right-side">
                 <div class="playlist-info">
                     <h5 class="playlist-song-name col-3 col-2">SONGS & ARTISTS</h5>
-                    <h5 class="playlist-song-category col-3">
+                    <h5 class="playlist-song-category col-3 col-2">
                         <div class="playlist-song-category-wrap">
                             <span>CATEGORIES</span>
                             <i class="playlist-song-category-icon bi bi-caret-down-fill"></i>
@@ -84,13 +102,12 @@
                                     <li class="selection-item">Rap Music</li>
                                     <li class="selection-item">Indie Music</li>
                                     <li class="selection-item">Pop Music</li>
-                                    <li class="selection-item">Bolero</li>
                                     <li class="selection-item">Favorite Music</li>
                                 </ul>
                             </div>
                         </div>
                     </h5>
-                    <div class="playlist-song-time col-3 col-2">
+                    <div class="playlist-song-time col-3">
                         <span>TIME</span>
                         <i class="playlist-song-time-icon bi bi-clock"></i>
                     </div>

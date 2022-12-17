@@ -6,3 +6,5 @@ const repeatBtn = document.querySelector('.btn-repeat');
 const favoriteBtn = document.querySelector('.song-favorite');
 const volumeBtn = document.querySelector('.volume-btn');
 const playlistBtn = document.querySelector('.playlist-buttons-toggle');
+const playListFavoriteBtn = document.querySelector('.playlist-buttons-favorite');
+const playListOptionBtn = document.querySelector('.playlist-buttons-options');

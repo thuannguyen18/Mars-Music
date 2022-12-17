@@ -147,4 +147,4 @@ const songs = [
     }
 ];
 
-let favoriteSongs = [];
+const favoriteSongs = [];

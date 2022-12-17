@@ -14,9 +14,12 @@ const cdThumbnailIcon = document.querySelector('.playlist-cd-thumbnail-button-ic
 const playlistTitle = document.querySelector('.playlist-song-title');
 const playlistSinger = document.querySelector('.playlist-song-singer');
 const songLists = document.querySelector('.song-list');
+const selection = document.querySelector('.selection');
 const selectionList = document.querySelector('.selection-list');
 const selectionItems = document.querySelectorAll('.selection-item');
-
+const playlistFavoriteIcon = document.querySelector('.playlist-buttons-favorite-icon');
+const userAvatar = document.querySelector('.header-user-avatar');
+const userAvatarOption = document.querySelector('.header-user-avatar-options');
 
 
 

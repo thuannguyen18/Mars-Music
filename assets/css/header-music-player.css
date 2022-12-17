@@ -26,12 +26,13 @@
 }
 
 .header-logo {
-    width: 150px;
+    width: 120px;
     display: flex;
     align-items: center;
     background-color: var(--background-color);
     border-radius: 25px;
     padding: 5px;
+    margin-left: 55px;
 }
 
 .header-logo-img {
@@ -50,6 +51,7 @@
     height: 40px;
     padding: 0 6px;
     box-shadow: 1px 1px 10px rgba(0, 0, 0, 0.2);
+    margin: 0 auto;
 }
 
 .header-search-bar-button {
@@ -94,6 +96,8 @@
 
 .header-user-avatar {
     margin-left: 2px;
+    position: relative;
+    cursor: pointer;
 }
 
 .header-user-avatar-icon {
@@ -102,12 +106,12 @@
     top: 1px;
 }
 .header-user-name {
+    position: relative;
     font-size: 1.4rem;
     margin-right: 6px;
 }
 .header-user-account-icon {
     font-size: 1.4rem;
-    position: relative;
     top: 1px;
 }
 
@@ -115,4 +119,79 @@
 .header-user-name,
 .header-user-account-icon {
     color: var(--text-color);
+}
+
+
+.header-user-avatar-options {
+    background-color: var(--background-color);
+    position: absolute;
+    top: calc(100% + 5px);
+    right: -5px;
+    width: 220px;
+    border-radius: 3px;
+    padding: 0px 14px 14px 14px;
+    z-index: 1;
+    display: none;
+}
+
+.header-user-avatar-option-list {
+    list-style: none;
+    padding-left: 0;
+}
+
+.header-user-avatar-option-item:first-child {
+    border: none;
+    display: flex;
+    align-items: center;
+    padding: 12px 10px;
+}
+
+.header-user-avatar-option-item:first-child:hover {
+    background-color: transparent;
+    cursor: default;
+}
+
+.header-user-avatar-icon-option {
+    font-size: 4rem;
+    color: var(--text-color);
+}
+
+.header-user-avatar-option-item {
+    border-top: 1px solid #ffffff1a;
+    padding: 12px 16px;
+    font-size: 1.4rem;
+    color: var(--text-color);
+}
+
+.header-user-avatar-option-item:hover {
+    background-color: #ffffff1a;
+    cursor: pointer;
+}
+
+.header-user-avatar-option-item-log-out {
+    text-decoration: none;
+    color: var(--text-color);
+}
+
+.user-wrap {
+    margin-left: 10px;
+}
+
+.user-name,
+.user-email {
+    display: block;
+}
+
+.user-name {
+    font-size: 1.6rem;
+    color: var(--text-color);
+}
+
+.user-email {
+    font-size: 1.4rem;
+    color: var(--sub-text-color);
+}
+
+.show {
+    display: block;
 }
