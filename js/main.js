@@ -16,7 +16,7 @@ btnLogin.addEventListener("click", (e) => {
       user.password === inputPassword.value
     ) {
       alert("Đăng Nhập Thành Công");
-      window.location.href = "index.html";
+      window.location.href = "music-player.html";
     } else  {
       alert("Đăng Nhập Thất Bại");
     }
