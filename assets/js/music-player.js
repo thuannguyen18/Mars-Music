@@ -97,20 +97,24 @@ audio.addEventListener('timeupdate', (e) => {
 audio.addEventListener('play', () => {
     toggleIcon.classList.replace('bi-play-circle-fill', 'bi-pause-circle-fill');
     cdThumbnailIcon.classList.replace('bi-play-circle-fill', 'bi-pause-circle-fill');
-    cd.style.transform = '';
-    cdThumbnail.style.borderRadius = '50%';
-    cdAnimation.play();
     playlistBtn.innerText = 'PAUSE';
+
+    cd.style.transform = 'none';
+    cdThumbnail.style.borderRadius = '50%';
+
+    cdAnimation.play();
     isPlay = true;
 });
 
 audio.addEventListener('pause', () => {
     toggleIcon.classList.replace('bi-pause-circle-fill', 'bi-play-circle-fill');
     cdThumbnailIcon.classList.replace('bi-pause-circle-fill', 'bi-play-circle-fill');
+    playlistBtn.innerText = 'CONTINUE';
+
     cd.style.transform = 'rotate(360deg)';
     cdThumbnail.style.borderRadius = '';
+    
     cdAnimation.pause();
-    playlistBtn.innerText = 'CONTINUE';
     isPlay = false;
 });
 
