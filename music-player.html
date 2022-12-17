@@ -167,5 +167,15 @@
     <script src="./assets/js/buttons.js"></script>
     <script src="./assets/js/functions.js"></script>
     <script src="./assets/js/music-player.js"></script>
+
+    <script>
+        const headerName = document.getElementsByClassName("header-user-name")
+        const user = JSON.parse(localStorage.getItem('account'));
+        const userNamespan = document.getElementsByClassName("user-name")
+        const userEmailspan = document.getElementsByClassName("user-email")
+        userNamespan[0].innerHTML = user.username
+        userEmailspan[0].innerHTML = user.email
+        headerName[0].innerHTML = user.username;
+    </script>
 </body>
 </html>
