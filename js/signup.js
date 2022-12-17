@@ -24,7 +24,7 @@ btnRegister.addEventListener("click", (e) => {
       password: inputPasswordRegister.value,
     };
     let json = JSON.stringify(user);
-    localStorage.setItem(inputUsernameRegister.value, json);
+    localStorage.setItem('account', json);
     alert("Đăng Ký Thành Công");
     window.location.href = "login.html";
   }

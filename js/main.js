@@ -10,7 +10,7 @@ btnLogin.addEventListener("click", (e) => {
   if (inputUsername.value === "" || inputPassword.value === "") {
     alert("Vui lòng không để trống");
   } else {
-    const user = JSON.parse(localStorage.getItem(inputUsername.value));
+    const user = JSON.parse(localStorage.getItem('account'));
     if (
       user.username === inputUsername.value &&
       user.password === inputPassword.value
