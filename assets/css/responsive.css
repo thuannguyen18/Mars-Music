@@ -1,13 +1,5 @@
 /* Tablet */
 @media (max-width: 859px) { 
-    .header-logo {
-        margin: 0 auto;
-    }
-
-    .header-search-bar {
-        display: none;
-    }
-
     .header-user-account {
         padding: 0;
         margin: 0;
@@ -123,6 +115,10 @@
     .header {
         height: 90px;
         justify-content: center;
+    }
+
+    .header-search-mobile-button {
+        display: block;
     }
 
     .header-logo {
