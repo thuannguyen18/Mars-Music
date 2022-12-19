@@ -186,12 +186,6 @@ function randomFavoriteSong() {
     handleFavorite(favorID, favorIndex);
 }
 
-// Lặp lại bài hát
-function repeatSong() {
-    audio.loop = true;
-    audio.play();
-}
-
 // Tắt âm lượng
 function mute(active) {
     return active ? audio.muted = 'muted' : audio.muted = '';
@@ -282,4 +276,13 @@ function handleFavorite(id, index) {
     loadSong(id);
     loadSongInfo(id);
     loadFavoriteSongs(id);
+}
+
+function scrollCenter() {
+    setTimeout(() => {
+        document.querySelector('.song-active').scrollIntoView({
+            behavior: "smooth",
+            block: "center"
+        });
+    }, 300)
 }

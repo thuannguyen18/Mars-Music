@@ -53,6 +53,7 @@ nextBtn.addEventListener('click', () => {
     } else {
         nextSong();
     }
+    scrollCenter();
 });
 
 prevBtn.addEventListener('click', () => {
@@ -64,6 +65,7 @@ prevBtn.addEventListener('click', () => {
     } else {
         previousSong();
     }
+    scrollCenter();
 });
 
 randomBtn.addEventListener('click', () => {
@@ -76,6 +78,7 @@ repeatBtn.addEventListener('click', () => {
     const repeat = document.querySelector('.btn-repeat-icon');
     isRepeat = !isRepeat;
     repeat.classList.toggle('active', isRepeat);
+    console.log(isRepeat);
 });
 
 audio.addEventListener('timeupdate', (e) => {
@@ -125,10 +128,12 @@ audio.addEventListener('ended', () => {
         if (isRandom) randomSong();
         if (isFavor) nextFavoriteSong();
     } else if (isRepeat) {
-        repeatSong();
+        audio.play();
     } else {
         nextSong();
     }
+    scrollCenter();
+    console.log(isRepeat);
 });
 
 progressBar.addEventListener('mouseover', () => {
@@ -242,7 +247,10 @@ songLists.addEventListener('click', (e) => {
         index = Number(popItem.getAttribute('index'));
         handleCategory(songID, index, pops, 'pop');
     }
+
+    scrollCenter();
 });
+
 
 selectionList.addEventListener('click', selectCate);
 
