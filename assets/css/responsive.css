@@ -5,6 +5,10 @@
         margin: 0;
     }
 
+    .header-search-bar {
+        width: 300px;
+    }
+
     .col-2 {
         width: calc(100% / 2);
     }
@@ -133,6 +137,11 @@
     .header-search-bar,
     .header-user-name {
         display: none;
+    }
+
+    .header-user-avatar-options {
+        position: fixed;
+        top: 0;
     }
 
     .playlist {

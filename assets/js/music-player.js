@@ -199,7 +199,6 @@ songLists.addEventListener('click', (e) => {
         }
 
         if (songFavorite) {
-            e.stopPropagation();
             addToFavorite(songID);
         }
     }
@@ -208,11 +207,7 @@ songLists.addEventListener('click', (e) => {
         if (favoriteItem) {
             favorID = Number(favoriteItem.getAttribute('id'));
             favorIndex = Number(favoriteItem.getAttribute('index'));
-            audio.src = favoriteSongs[favorIndex].path;
-            audio.play();
-            loadSong(favorID);
-            loadSongInfo(favorID);
-            loadFavoriteSongs(favorID);
+            handleFavorite(favorID, favorIndex);
         }
 
         if (songOption) {

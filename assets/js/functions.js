@@ -97,10 +97,11 @@ function loadFavoriteSongs(favorID) {
 // Xử lý khi người dùng nhấn vào hình trái tim
 function addToFavorite(id) {
     let songIndex = id - 1;
+    songs[songIndex].isFavorite = true;
+
     const favorite = document.querySelector('.song-favorite-icon');
     const favoriteItems = document.querySelectorAll('.song-item-favorite-icon');
 
-    songs[songIndex].isFavorite = true;
     favorite.classList.replace('bi-heart', 'bi-heart-fill');
     playlistFavoriteIcon.classList.replace('bi-heart', 'bi-heart-fill');
     favoriteItems[songIndex].classList.replace('bi-heart', 'bi-heart-fill');
@@ -110,9 +111,10 @@ function addToFavorite(id) {
 // Xoá bài hát khỏi danh sách yêu thích
 function removeFavoriteSong(id) {
     let songIndex = id - 1;
+    songs[songIndex].isFavorite = false;
+    
     const favorite = document.querySelector('.song-favorite-icon');
 
-    songs[songIndex].isFavorite = false;
     favorite.classList.replace('bi-heart-fill', 'bi-heart');
     favoriteSongs.splice(favorIndex, 1);
     loadFavoriteSongs();
@@ -239,8 +241,6 @@ function selectCate(e) {
     switch (cate) {
         case 'All Music':
             target.classList.add('selection-item-active');
-            isRepeat = false;
-            isRandom = false;
             isFavor = false;
             loadSongs();
             break;
@@ -262,7 +262,7 @@ function selectCate(e) {
         case 'Favorite Music':
             target.classList.add('selection-item-active');
             isFavor = true;
-            loadFavoriteSongs(songID);
+            loadFavoriteSongs();
             break;
     }
 }
