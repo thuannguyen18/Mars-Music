@@ -1,0 +1,141 @@
+html,
+body {
+    background-color: rgb(255, 255, 255);
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    /* justify-content:center; */
+    align-items: center;
+    box-sizing: border-box;
+    margin: 0;
+    font-family: "Poppins", sans-serif;
+}
+
+.main_container {
+    background-color: rgb(255, 255, 255);
+    width: 60%;
+    height: 100%;
+}
+
+.container_signin {
+    font-size: 20px;
+    margin-left: 20px;
+    font-style: italic;
+    color: rgb(24, 24, 157);
+}
+
+.container_slogan {
+    margin-top: 10%;
+    margin-bottom: 5%;
+    font-size: 55px;
+    font-weight: 700;
+    color: #424242;
+    /* display: flex; */
+    text-align: center;
+}
+
+.container_highlight {
+    /* margin-top: 55%; */
+    background-color: #68659a;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    align-items: center;
+    margin: auto;
+    /* height: 50%; */
+    border-radius: 25px;
+
+}
+
+.container_highlight_photo {
+    background-color: #68659a;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 50%;
+    /* height:50%; */
+    border-radius: 25px;
+
+
+}
+
+.container_highlight_text {
+    width: 50%;
+    /* height: 50%; */
+    background-color: #68659a;
+    color: #EEE8E8;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    margin: 0;
+    border-radius: 25px;
+    padding-right: 30px;
+}
+
+.container_highlight_text p {
+    margin: 20px 0px;
+}
+
+.container_footer_Text {
+    margin-top: 28%;
+    /* margin-right: 30px; */
+    /* margin-bottom: 10px; */
+    text-align: right;
+    color: #6E6BA0;
+    font-weight: 700;
+}
+
+.container_footer_Text p {
+    margin-right: 25px;
+    /* margin-bottom: 25px; */
+    padding-bottom: 25px;
+}
+
+
+/* Media queriess */
+@media screen and (max-width:600px) {
+    .box--responsive {
+        flex-direction: column;
+    }
+
+    .box__item--responsive {
+        width: 100%;
+    }
+}
+
+/* Responsive Layout */
+@media screen and (max-width:600px) {
+    main {
+        flex-direction: column;
+        margin: 0;
+    }
+
+    .container_highlight_photo {
+        display: none;
+    }
+
+    .container_slogan {
+        font-size: 20px;
+    }
+
+    .container_highlight_text p:nth-child(1) {
+        font-size: 40px !important;
+    }
+
+
+}
+
+/* @media screen and (max-width:630px) {
+        main{
+            flex-direction: column;
+            margin: 0;
+        }
+        .container_highlight_photo {
+            display: none;
+        }
+        .container_slogan {
+            font-size: 22px;}
+        } */
