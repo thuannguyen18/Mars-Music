@@ -71,12 +71,12 @@ const songs = [
     },
     {
         id: 8,
-        name: "Crazy For You",
-        singer: "Madonna",
-        image: "/assets/images/img8.png",
+        name: "Mai Này Ta",
+        singer: "Thành Dũng, NVT, HIEUTHUHAI",
+        image: "/assets/images/img8.jpg",
         path: "./assets/music/song8.mp3",
         cate: "Pop Music",
-        time: 224,
+        time: 231,
         isFavorite: false
     },       
     {
@@ -86,7 +86,7 @@ const songs = [
         image: "./assets/images/img9.jpg",
         path: "./assets/music/song9.mp3",
         cate: "Indie Music",
-        time: 288,
+        time: 272,
         isFavorite: false
     },
     {
@@ -143,6 +143,51 @@ const songs = [
         path: "./assets/music/song15.mp3",
         cate: "Pop Music",
         time: 270,
+        isFavorite: false
+    },
+    {   id: 16,
+        name: "Đến Bao Giờ",
+        singer: "Datmaniac, Cá Hồi Hoang",
+        image: "/assets/images/img16.jpg",
+        path: "./assets/music/song16.mp3",
+        cate: "Rap Music",
+        time: 241,
+        isFavorite: false
+    },
+    {   id: 17,
+        name: "Chạy Khỏi Thế Giới Này",
+        singer: "Phương Ly, Da LAB",
+        image: "/assets/images/img17.jpg",
+        path: "./assets/music/song17.mp3",
+        cate: "Pop Music",
+        time: 255,
+        isFavorite: false
+    },
+    {   id: 18,
+        name: "tiny love",
+        singer: "Thịnh Suy",
+        image: "/assets/images/img18.jpg",
+        path: "./assets/music/song18.mp3",
+        cate: "Indie Music",
+        time: 158,
+        isFavorite: false
+    },
+    {   id: 19,
+        name: "Tình Yêu Xanh Lá (juju)",
+        singer: "Thịnh Suy",
+        image: "/assets/images/img19.jpg",
+        path: "./assets/music/song19.mp3",
+        cate: "Indie Music",
+        time: 179,
+        isFavorite: false
+    },
+    {   id: 20,
+        name: "Vì Anh Đâu Có Biết",
+        singer: "MADIHU, Vũ",
+        image: "/assets/images/img20.jpg",
+        path: "./assets/music/song20.mp3",
+        cate: "Indie Music",
+        time: 241,
         isFavorite: false
     }
 ];

@@ -56,6 +56,7 @@ function loadSongs(index, array = songs, category = 'song') {
     songList.innerHTML = list;
 }
 
+
 // Hiển thị các bài hát yêu thích
 function loadFavoriteSongs(favorID) {
     const songList = document.querySelector('.song-list');
@@ -241,7 +242,7 @@ function selectCate(e) {
         case 'Rap Music':
             target.classList.add('selection-item-active');
             raps = songs.filter(song => song.cate == cate);
-            loadSongs('', raps, 'rap');
+            loadSongs('', raps, 'rap'); 
             break;
         case 'Indie Music':
             target.classList.add('selection-item-active');
@@ -284,5 +285,5 @@ function scrollCenter() {
             behavior: "smooth",
             block: "center"
         });
-    }, 300)
+    }, 300);
 }

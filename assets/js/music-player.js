@@ -116,7 +116,7 @@ audio.addEventListener('pause', () => {
 
     cd.style.transform = 'rotate(360deg)';
     cdThumbnail.style.borderRadius = '';
-    
+
     cdAnimation.pause();
     isPlay = false;
 });
@@ -124,16 +124,17 @@ audio.addEventListener('pause', () => {
 audio.addEventListener('ended', () => {
     if (isRandom && isFavor) {
         randomFavoriteSong();
+    } else if (isRepeat && isFavor) {
+        audio.play();
     } else if (isRandom || isFavor) {
         if (isRandom) randomSong();
         if (isFavor) nextFavoriteSong();
-    } else if (isRepeat) {
+    } else if (isRepeat || isFavor) {
         audio.play();
     } else {
         nextSong();
     }
     scrollCenter();
-    console.log(isRepeat);
 });
 
 progressBar.addEventListener('mouseover', () => {
@@ -203,9 +204,10 @@ songLists.addEventListener('click', (e) => {
             handleCategory(songID, index, songs, 'song');
         }
 
-        if (songFavorite) {
+        if (songFavorite && !songs[index].isFavorite) {
             addToFavorite(songID);
         }
+
     }
 
     if (favoriteItem || songOption) {
@@ -224,6 +226,7 @@ songLists.addEventListener('click', (e) => {
                 remove.onclick = function () {
                     if (favorID === Number(remove.id)) {
                         removeFavoriteSong(favorID);
+                        favorIndex = null;
                     }
                 }
             });
